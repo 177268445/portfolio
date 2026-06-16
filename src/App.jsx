@@ -19,7 +19,7 @@ const projects = [
     title: '爱新芽数字化正畸后台管理端',
     en: 'AI-SHINYE CLOUD CONSOLE',
     type: 'MEDICAL / SAAS / 2021—2026',
-    image: '/assets/aishinye/work-entry.png',
+    image: '/assets/aishinye/work-entry.jpg',
     accent: '#5260FE',
     metric: '全流程数字化闭环',
     copy: '连接诊所、医生、患者与工厂，覆盖病例、方案、生产与治疗跟进。',
