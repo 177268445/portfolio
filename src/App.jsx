@@ -11,17 +11,19 @@ import {
   MoveRight,
   X,
 } from 'lucide-react'
+import ProjectDetail from './ProjectDetail'
 
 const projects = [
   {
     index: '01',
-    title: '数字化正畸管理平台',
-    en: 'ORTHODONTIC OS',
-    type: 'PRODUCT / SAAS / 2025',
-    image: '/assets/project-dashboard.png',
-    accent: '#b8ff57',
-    metric: '巡检效率 +35%',
-    copy: '从病例、工单到经营数据，重构口腔医疗集团的全业务协作路径。',
+    title: '爱新芽数字化正畸后台管理端',
+    en: 'AI-SHINYE CLOUD CONSOLE',
+    type: 'MEDICAL / SAAS / 2021—2026',
+    image: '/assets/aishinye/work-entry.png',
+    accent: '#5260FE',
+    metric: '全流程数字化闭环',
+    copy: '连接诊所、医生、患者与工厂，覆盖病例、方案、生产与治疗跟进。',
+    href: '#/work/aishinye',
   },
   {
     index: '02',
@@ -76,7 +78,7 @@ const strengths = [
   },
 ]
 
-function useReveal() {
+function useReveal(route) {
   useEffect(() => {
     const nodes = document.querySelectorAll('[data-reveal]')
     const observer = new IntersectionObserver(
@@ -85,14 +87,21 @@ function useReveal() {
     )
     nodes.forEach((node) => observer.observe(node))
     return () => observer.disconnect()
-  }, [])
+  }, [route])
 }
 
 function App() {
+  const [route, setRoute] = useState(window.location.hash)
   const [menuOpen, setMenuOpen] = useState(false)
   const [copied, setCopied] = useState(false)
   const heroRef = useRef(null)
-  useReveal()
+  useReveal(route)
+
+  useEffect(() => {
+    const onHashChange = () => setRoute(window.location.hash)
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => {
@@ -101,6 +110,8 @@ function App() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  if (route.startsWith('#/work/aishinye')) return <ProjectDetail />
 
   const copyEmail = async () => {
     await navigator.clipboard.writeText('lin.yue@example.com')
@@ -189,13 +200,13 @@ function App() {
         <div className="project-list shell">
           {projects.map((project) => (
             <article className="project-card" key={project.index} data-reveal style={{ '--accent': project.accent }}>
-              <div className="project-media">
-                <img src={project.image} alt={`${project.title}项目封面`} />
+              <a className="project-media" href={project.href || '#contact'} aria-label={`查看${project.title}`}>
+                <img src={project.image} alt={`${project.title}项目封面`} loading="lazy" />
                 <div className="project-overlay" />
                 <span className="project-number">{project.index}</span>
                 <span className="metric">{project.metric}</span>
-                <a href="#contact" className="view-project" aria-label={`查看${project.title}`}><ArrowUpRight /></a>
-              </div>
+                <span className="view-project"><ArrowUpRight /></span>
+              </a>
               <div className="project-meta">
                 <div><span>{project.type}</span><h3>{project.title}</h3></div>
                 <div><strong>{project.en}</strong><p>{project.copy}</p></div>
