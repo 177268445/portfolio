@@ -12,6 +12,8 @@ import {
   X,
 } from 'lucide-react'
 import ProjectDetail from './ProjectDetail'
+import DentalSalonDetail from './DentalSalonDetail'
+import HeroParticles from './HeroParticles'
 
 const projects = [
   {
@@ -19,7 +21,7 @@ const projects = [
     title: '爱新芽数字化正畸后台管理端',
     en: 'AI-SHINYE CLOUD CONSOLE',
     type: 'MEDICAL / SAAS / 2021—2026',
-    image: '/assets/aishinye/work-entry.jpg',
+    image: '/assets/work-aishinye-entry.jpg',
     accent: '#5260FE',
     metric: '全流程数字化闭环',
     copy: '连接诊所、医生、患者与工厂，覆盖病例、方案、生产与治疗跟进。',
@@ -27,13 +29,14 @@ const projects = [
   },
   {
     index: '02',
-    title: 'AI 头影测量系统',
-    en: 'AI CEPHALOMETRICS',
-    type: 'AI / MEDICAL / 2024',
-    image: '/assets/project-ai.png',
-    accent: '#64e6d5',
-    metric: '核心任务 +25%',
-    copy: '把复杂的医学算法结果，转译为可信、可编辑、可交付的临床工具。',
+    title: '学牙网线上沙龙',
+    en: 'XUEYA ONLINE SALON',
+    type: 'DENTAL EDUCATION / LIVE UI / 2026',
+    image: '/assets/work-xueya-entry.jpg',
+    accent: '#43cfe0',
+    metric: '8370 人在线观看',
+    copy: '为口腔医生进修场景设计专业直播课堂，支持病例演示、多人互动、成员管理与连麦队列。',
+    href: '#/work/xueya-salon',
   },
   {
     index: '03',
@@ -112,9 +115,10 @@ function App() {
   }, [])
 
   if (route.startsWith('#/work/aishinye')) return <ProjectDetail />
+  if (route.startsWith('#/work/xueya-salon')) return <DentalSalonDetail />
 
   const copyEmail = async () => {
-    await navigator.clipboard.writeText('lin.yue@example.com')
+    await navigator.clipboard.writeText('18968046566@163.com')
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1800)
   }
@@ -123,7 +127,7 @@ function App() {
     <main>
       <header className="site-header">
         <a className="logo" href="#top" aria-label="返回首页">
-          <span>LY</span><i>26</i>
+          <span>LH</span><i>26</i>
         </a>
         <nav className={menuOpen ? 'nav-links is-open' : 'nav-links'}>
           <a href="#about" onClick={() => setMenuOpen(false)}>关于</a>
@@ -139,8 +143,8 @@ function App() {
       </header>
 
       <section className="hero" id="top" ref={heroRef}>
-        <video className="hero-video" autoPlay muted loop playsInline poster="/assets/hero-medical.png" aria-hidden="true" />
         <div className="hero-poster" aria-hidden="true" />
+        <HeroParticles />
         <div className="scanline" aria-hidden="true" />
         <div className="noise" aria-hidden="true" />
         <div className="hero-content shell">
@@ -154,7 +158,7 @@ function App() {
             <span className="hero-enter delay-3 title-indent">COMPLEXITY.</span>
           </h1>
           <div className="hero-bottom hero-enter delay-4">
-            <p>林悦，视觉 / AI / 品牌设计师<br />用系统思维，为复杂科技创造清晰而有温度的表达。</p>
+            <p>李华芳，视觉 / AI / 品牌设计师<br />用系统思维，为复杂科技创造清晰而有温度的表达。</p>
             <a className="round-link" href="#work" aria-label="查看精选项目"><ArrowDown /></a>
           </div>
         </div>
@@ -165,8 +169,8 @@ function App() {
         <div className="section-label" data-reveal><span>01</span> PROFILE / 关于我</div>
         <div className="about-grid">
           <div className="portrait-wrap" data-reveal>
-            <img src="/assets/portrait.png" alt="林悦个人肖像" />
-            <div className="portrait-caption"><span>LIN YUE</span><span>HANGZHOU, CN</span></div>
+            <img src="/assets/profile-cosmic.jpg" alt="李华芳个人肖像" />
+            <div className="portrait-caption"><span>LI HUAFANG</span><span>HANGZHOU, CN</span></div>
           </div>
           <div className="about-copy" data-reveal>
             <p className="eyebrow">VISUAL DESIGNER / AI DESIGNER / BRAND DESIGNER</p>
@@ -177,9 +181,9 @@ function App() {
               <p>负责数字化正畸产品矩阵的全链路设计，覆盖管理后台、医生 App、医学设计软件、AI 测量工具与品牌官网。</p>
             </div>
             <div className="contact-list">
-              <a href="mailto:lin.yue@example.com"><Mail size={15} />lin.yue@example.com</a>
+              <a href="mailto:18968046566@163.com"><Mail size={15} />18968046566@163.com</a>
               <span><MapPin size={15} />杭州，中国</span>
-              <a href="https://behance.net/linyue" target="_blank" rel="noreferrer"><ArrowUpRight size={15} />Behance</a>
+              <a href="#work"><ArrowUpRight size={15} />作品集</a>
             </div>
           </div>
         </div>
@@ -247,13 +251,13 @@ function App() {
           </div>
           <div className="contact-main" data-reveal>
             <p>LET'S MAKE</p>
-            <a href="mailto:lin.yue@example.com">SOMETHING<br /><em>MEANINGFUL.</em><MoveRight /></a>
+            <a href="mailto:18968046566@163.com">SOMETHING<br /><em>MEANINGFUL.</em><MoveRight /></a>
           </div>
           <div className="contact-footer">
-            <div><span>EMAIL</span><button onClick={copyEmail}>{copied ? '已复制邮箱' : 'lin.yue@example.com'}<Copy size={14} /></button></div>
-            <div><span>SOCIAL</span><a href="https://behance.net/linyue" target="_blank" rel="noreferrer">BEHANCE <ArrowUpRight size={14} /></a></div>
+            <div><span>EMAIL</span><button onClick={copyEmail}>{copied ? '已复制邮箱' : '18968046566@163.com'}<Copy size={14} /></button></div>
+            <div><span>WORKS</span><a href="#work">SELECTED WORK <ArrowUpRight size={14} /></a></div>
             <div><span>LOCAL TIME</span><strong>HANGZHOU · GMT+8</strong></div>
-            <p>© 2026 LIN YUE</p>
+            <p>© 2026 LI HUAFANG</p>
           </div>
         </div>
       </footer>
