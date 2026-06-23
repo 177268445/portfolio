@@ -45,10 +45,10 @@ img { display: block; width: 100%; }
 .hero-poster {
   z-index: -3;
   background:
-    radial-gradient(circle at 74% 42%, rgba(20, 94, 112, .28), transparent 31%),
-    radial-gradient(circle at 92% 12%, rgba(222, 232, 246, .08), transparent 23%),
-    radial-gradient(circle at 14% 14%, rgba(54, 94, 130, .18), transparent 28%),
-    linear-gradient(90deg, rgba(2,3,3,.98) 0%, rgba(2,3,3,.86) 37%, rgba(2,3,3,.45) 68%, rgba(2,3,3,.78) 100%);
+    radial-gradient(circle at 74% 42%, rgba(24, 112, 122, .38), transparent 31%),
+    radial-gradient(circle at 84% 18%, rgba(224, 234, 248, .14), transparent 25%),
+    radial-gradient(circle at 12% 14%, rgba(68, 89, 112, .18), transparent 27%),
+    linear-gradient(90deg, rgba(1,2,2,.98) 0%, rgba(3,5,5,.9) 36%, rgba(13,20,23,.55) 68%, rgba(3,4,5,.82) 100%);
   transform: translateY(var(--scroll, 0));
 }
 .hero::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.08), transparent 55%, rgba(8,10,9,.84)); }
@@ -59,8 +59,8 @@ img { display: block; width: 100%; }
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: .88;
-  filter: saturate(1.08) contrast(1.03);
+  opacity: 1;
+  filter: saturate(1.22) contrast(1.08);
 }
 .hero::before {
   content: '';
@@ -69,9 +69,9 @@ img { display: block; width: 100%; }
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 73% 45%, rgba(86, 160, 184, .15), transparent 28%),
-    radial-gradient(circle at 63% 35%, rgba(23, 218, 190, .07), transparent 20%),
-    repeating-radial-gradient(circle at 70% 43%, rgba(220,232,244,.026) 0 1px, transparent 1px 7px);
+    radial-gradient(circle at 73% 45%, rgba(118, 166, 188, .2), transparent 29%),
+    radial-gradient(circle at 63% 35%, rgba(23, 218, 190, .1), transparent 21%),
+    repeating-radial-gradient(circle at 70% 43%, rgba(232,240,248,.034) 0 1px, transparent 1px 7px);
   mix-blend-mode: screen;
 }
 .scanline { position: absolute; z-index: -1; inset: -30% 0 auto; height: 24%; background: linear-gradient(transparent, rgba(178,255,208,.065), transparent); animation: scan 9s linear infinite; }

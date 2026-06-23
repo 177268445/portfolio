@@ -5,22 +5,32 @@ const prefersReducedMotion = () =>
 
 function createParticles() {
   const particles = []
-  const step = 0.012
+  const step = 0.011
 
   for (let y = -0.5; y <= 0.5; y += step) {
     for (let x = -0.5; x <= 0.5; x += step) {
       const jitterX = x + (Math.random() - 0.5) * step * 0.7
       const jitterY = y + (Math.random() - 0.5) * step * 0.7
       const distance = Math.hypot(jitterX, jitterY)
-      if (distance > 0.5 || Math.random() < 0.05) continue
+      if (distance > 0.5 || Math.random() < 0.03) continue
 
       const edge = Math.max(0, 1 - distance / 0.5)
-      const highlight = Math.max(0, 1 - Math.hypot(jitterX + 0.18, jitterY + 0.24) / 0.34)
-      const rim = Math.max(0, (distance - 0.36) / 0.14)
-      const teal = Math.max(0, 1 - Math.hypot(jitterX - 0.22, jitterY + 0.04) / 0.34)
-      const r = Math.round(14 + highlight * 180 + teal * 18 + rim * 26)
-      const g = Math.round(28 + highlight * 185 + teal * 145 + rim * 80)
-      const b = Math.round(38 + highlight * 205 + teal * 150 + rim * 135)
+      const highlight = Math.max(0, 1 - Math.hypot(jitterX + 0.2, jitterY + 0.22) / 0.38)
+      const rim = Math.max(0, (distance - 0.34) / 0.16)
+      const teal = Math.max(0, 1 - Math.hypot(jitterX - 0.2, jitterY + 0.02) / 0.38)
+      const cobalt = Math.max(0, 1 - Math.hypot(jitterX - 0.28, jitterY - 0.12) / 0.26)
+      const silver = Math.max(0, 1 - Math.hypot(jitterX + 0.02, jitterY - 0.08) / 0.46)
+      const sparkle = Math.random() > 0.985 ? 1 : 0
+      const colorShift = Math.random()
+      const r = Math.round(16 + highlight * 190 + silver * 88 + cobalt * 18 + rim * 46 + sparkle * 70)
+      const g = Math.round(34 + highlight * 190 + teal * 150 + silver * 96 + cobalt * 54 + rim * 86 + sparkle * 62)
+      const b = Math.round(48 + highlight * 205 + teal * 120 + silver * 118 + cobalt * 205 + rim * 140 + sparkle * 54)
+      const tint =
+        colorShift > 0.78
+          ? [Math.min(255, r + 18), Math.min(255, g + 28), Math.min(255, b + 46)]
+          : colorShift > 0.52
+            ? [Math.max(0, r - 8), Math.min(255, g + 34), Math.min(255, b + 24)]
+            : [r, g, b]
 
       particles.push({
         nx: jitterX,
@@ -32,9 +42,9 @@ function createParticles() {
         scatter: 0,
         seed: Math.random() * Math.PI * 2,
         drift: 0.22 + Math.random() * 0.68,
-        size: 0.22 + Math.random() * 0.62,
-        opacity: 0.24 + edge * 0.56 + highlight * 0.18,
-        color: `rgba(${r}, ${g}, ${b}, 1)`,
+        size: 0.3 + Math.random() * 0.72 + sparkle * 0.18,
+        opacity: 0.4 + edge * 0.64 + highlight * 0.28 + rim * 0.18 + sparkle * 0.18,
+        color: `rgba(${tint[0]}, ${tint[1]}, ${tint[2]}, 1)`,
       })
     }
   }
@@ -57,6 +67,7 @@ function HeroParticles() {
     let dpr = 1
     let animationFrame
     let tick = 0
+    let sphere = { x: 0, y: 0, radius: 0 }
 
     const resize = () => {
       const rect = hero.getBoundingClientRect()
@@ -68,9 +79,10 @@ function HeroParticles() {
       canvas.style.width = `${width}px`
       canvas.style.height = `${height}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      const scale = Math.min(width, height) * (width < 760 ? 0.72 : 0.82)
-      const originX = width < 760 ? width * 0.72 : width * 0.78
-      const originY = width < 760 ? height * 0.4 : height * 0.42
+      const scale = Math.min(width, height) * (width < 760 ? 0.84 : 0.98)
+      const originX = width < 760 ? width * 0.72 : width * 0.77
+      const originY = width < 760 ? height * 0.39 : height * 0.42
+      sphere = { x: originX, y: originY, radius: scale * 0.5 }
       particles = particles.map((particle) => ({
         ...particle,
         baseX: originX + particle.nx * scale,
@@ -107,10 +119,46 @@ function HeroParticles() {
       ctx.restore()
     }
 
+    const drawSphereBase = () => {
+      if (!sphere.radius) return
+      ctx.save()
+      ctx.globalCompositeOperation = 'screen'
+
+      const halo = ctx.createRadialGradient(sphere.x, sphere.y, sphere.radius * 0.22, sphere.x, sphere.y, sphere.radius * 1.34)
+      halo.addColorStop(0, 'rgba(34, 164, 151, .16)')
+      halo.addColorStop(0.52, 'rgba(42, 116, 154, .18)')
+      halo.addColorStop(1, 'rgba(0, 0, 0, 0)')
+      ctx.fillStyle = halo
+      ctx.beginPath()
+      ctx.arc(sphere.x, sphere.y, sphere.radius * 1.34, 0, Math.PI * 2)
+      ctx.fill()
+
+      const body = ctx.createRadialGradient(
+        sphere.x - sphere.radius * 0.28,
+        sphere.y - sphere.radius * 0.3,
+        sphere.radius * 0.05,
+        sphere.x,
+        sphere.y,
+        sphere.radius,
+      )
+      body.addColorStop(0, 'rgba(236, 246, 255, .42)')
+      body.addColorStop(0.24, 'rgba(160, 194, 211, .28)')
+      body.addColorStop(0.5, 'rgba(24, 114, 121, .2)')
+      body.addColorStop(0.76, 'rgba(9, 29, 38, .18)')
+      body.addColorStop(1, 'rgba(0, 0, 0, 0)')
+      ctx.fillStyle = body
+      ctx.beginPath()
+      ctx.arc(sphere.x, sphere.y, sphere.radius, 0, Math.PI * 2)
+      ctx.fill()
+
+      ctx.restore()
+    }
+
     const render = () => {
       tick += 1
       ctx.clearRect(0, 0, width, height)
       drawStars()
+      drawSphereBase()
 
       ctx.save()
       ctx.globalCompositeOperation = 'lighter'
@@ -146,8 +194,8 @@ function HeroParticles() {
         particle.x += particle.vx
         particle.y += particle.vy
 
-        const alpha = Math.max(0.12, particle.opacity * (1 - disperse * 0.68))
-        const size = particle.size * (1 + influence * 2.8 + disperse * 1.2)
+        const alpha = Math.max(0.18, particle.opacity * (1 - disperse * 0.58))
+        const size = particle.size * (1 + influence * 2.4 + disperse * 1.1)
         ctx.fillStyle = particle.color.replace(/[\d.]+\)$/g, `${alpha})`)
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2)
