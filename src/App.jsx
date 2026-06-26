@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import ProjectDetail from './ProjectDetail'
 import DentalSalonDetail from './DentalSalonDetail'
+import ProductUniverseDetail from './ProductUniverseDetail'
 import HeroParticles from './HeroParticles'
 
 const projects = [
@@ -32,7 +33,7 @@ const projects = [
     title: '学牙网线上沙龙',
     en: 'XUEYA ONLINE SALON',
     type: 'DENTAL EDUCATION / LIVE UI / 2026',
-    image: '/assets/work-xueya-entry.jpg',
+    image: '/assets/work-covers/xueya-salon-cover.jpg',
     accent: '#43cfe0',
     metric: '8370 人在线观看',
     copy: '为口腔医生进修场景设计专业直播课堂，支持病例演示、多人互动、成员管理与连麦队列。',
@@ -40,13 +41,14 @@ const projects = [
   },
   {
     index: '03',
-    title: '跨端设计系统',
-    en: 'DESIGN SYSTEM 01',
-    type: 'SYSTEM / BRAND / 2023',
-    image: '/assets/hero-medical.png',
-    accent: '#f0a96e',
-    metric: '协作效率 +30%',
-    copy: '一套覆盖 Web、App 与桌面端的设计语言，让复杂产品保持同一种秩序。',
+    title: '爱新芽数字化正畸设计生态',
+    en: 'AI-SHINYE DESIGN ECOSYSTEM',
+    type: 'PRODUCT MATRIX / IP / CAMPAIGN / 2021—2026',
+    image: '/assets/work-covers/aishinye-ecosystem-cover.jpg',
+    accent: '#b8ff57',
+    metric: '产品矩阵 + 运营 + IP',
+    copy: '从跨端产品界面、运营活动视觉到 Smile Buddy 品牌 IP，建立爱新芽完整设计生态。',
+    href: '#/work/aishinye-universe',
   },
 ]
 
@@ -114,6 +116,7 @@ function App() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  if (route.startsWith('#/work/aishinye-universe')) return <ProductUniverseDetail />
   if (route.startsWith('#/work/aishinye')) return <ProjectDetail />
   if (route.startsWith('#/work/xueya-salon')) return <DentalSalonDetail />
 

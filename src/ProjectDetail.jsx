@@ -47,27 +47,27 @@ const features = [
   {
     no: '10', eyebrow: 'CASE MANAGEMENT', title: '病例中心', sub: '让患者资料成为可追踪的数据资产',
     copy: '将患者基础信息、口扫模型、医学影像、治疗记录与医生反馈统一归档，让不同角色快速判断病例阶段、资料完整度与处理优先级。',
-    image: '/assets/aishinye/case-list.jpg', tags: ['高频筛选', '状态标签', '资料完整度', '风险标记'],
+    image: '/assets/aishinye/feature-approved-case-detail.jpg', tags: ['高频筛选', '状态标签', '资料完整度', '风险标记'],
   },
   {
     no: '11', eyebrow: 'CLINICAL REVIEW', title: '方案审阅', sub: '把医生决策流程化、可回溯化',
     copy: '通过方案版本、审阅意见、退回原因与审批状态，将多轮治疗方案沟通沉淀为一条清晰的临床决策链路。',
-    image: '/assets/aishinye/plan-review.jpg', tags: ['版本记录', '审阅意见', '修改留痕', '方案确认'], reverse: true,
+    image: '/assets/aishinye/feature-3d-plan-preview.jpg', tags: ['版本记录', '审阅意见', '修改留痕', '方案确认'], reverse: true,
   },
   {
     no: '12', eyebrow: 'WORK ORDER', title: '工单中心', sub: '连接治疗方案与矫治器生产',
     copy: '方案确认后，病例数据、生产要求、交付时间与执行负责人被自动带入工单，临床端与工厂端围绕同一任务协同。',
-    image: '/assets/aishinye/work-order.jpg', tags: ['关联病例', '任务状态', '预计交付', '操作日志'],
+    image: '/assets/aishinye/feature-order-confirm.jpg', tags: ['关联病例', '任务状态', '预计交付', '操作日志'],
   },
   {
     no: '13', eyebrow: 'MANUFACTURING', title: '生产追踪', sub: '让矫治器制造过程透明可控',
     copy: '从数据检查、排产制作到质检发货，生产节点持续同步。诊所与医生能够提前识别延期、返工和资料异常。',
-    image: '/assets/aishinye/production.jpg', tags: ['排产计划', '节点提醒', '质量记录', '异常反馈'], reverse: true,
+    image: '/assets/aishinye/feature-material-review.jpg', tags: ['排产计划', '节点提醒', '质量记录', '异常反馈'], reverse: true,
   },
   {
     no: '14', eyebrow: 'REMOTE CARE', title: '医患互动', sub: '让治疗跟进不止发生在诊室内',
     copy: '围绕阶段照片、佩戴反馈、复诊计划与医生建议建立远程随访记录，让长期治疗中的每次变化都可以被及时发现。',
-    image: '/assets/aishinye/follow-up.jpg', tags: ['阶段影像', '远程判断', '复诊提醒', '医患记录'],
+    image: '/assets/aishinye/feature-case-material-detail.jpg', tags: ['阶段影像', '远程判断', '复诊提醒', '医患记录'],
   },
 ]
 
@@ -105,8 +105,7 @@ function ProjectDetail() {
         <div className="case-hero-visual" aria-hidden="true">
           <div className="orthodontic-orbit orbit-one" />
           <div className="orthodontic-orbit orbit-two" />
-          <div className="hero-screen"><img src="/assets/aishinye/cover.jpg" alt="" /></div>
-          <div className="hero-screen secondary"><img src="/assets/aishinye/case-detail.jpg" alt="" /></div>
+          <div className="hero-screen"><img src="/assets/aishinye/home-03.jpg" alt="" /></div>
         </div>
         <div className="case-scroll-mark">SCROLL TO EXPLORE <span>↓</span></div>
       </section>
@@ -235,7 +234,7 @@ function ProjectDetail() {
         <div className="dashboard-stats">
           <article><b>3,891</b><span>累计病例</span></article><article><b>90</b><span>进行中病例</span></article><article><b>10</b><span>待审阅方案</span></article><article><b>96%</b><span>生产完成率</span></article>
         </div>
-        <div className="dashboard-screen"><img src="/assets/aishinye/cover.jpg" alt="运营工作台界面" loading="lazy" /></div>
+        <div className="dashboard-screen"><img src="/assets/aishinye/feature-data-dashboard.jpg" alt="运营数据看板界面" loading="lazy" /></div>
       </section>
 
       <section className="case-frame visual-section">
@@ -251,7 +250,7 @@ function ProjectDetail() {
 
       <section className="case-frame system-section">
         <FrameHeader no="17" label="DESIGN SYSTEM" />
-        <div className="system-image"><img src="/assets/aishinye/drawer.jpg" alt="爱新芽组件界面" loading="lazy" /></div>
+        <div className="system-image"><img src="/assets/aishinye/feature-material-review-wide.jpg" alt="爱新芽组件界面" loading="lazy" /></div>
         <div className="system-copy"><span>SCALABLE DESIGN ASSETS</span><h2>从页面设计，<br />到组件资产沉淀</h2><p>将患者信息卡、状态标签、上传器、审批操作组、工单节点和生产时间轴沉淀为可复用组件，支撑后台持续扩展。</p><div><b>40+</b><span>核心组件</span><b>11</b><span>业务模块</span></div></div>
       </section>
 
@@ -260,8 +259,13 @@ function ProjectDetail() {
         <div className="case-section-title"><span>END-TO-END EXPERIENCE</span><h2>覆盖正畸服务全流程的<br />核心后台页面</h2></div>
         <div className="page-wall">
           {[
-            ['/assets/aishinye/case-analysis.jpg', '病例分析'], ['/assets/aishinye/review.jpg', '资料审核'], ['/assets/aishinye/case-detail.jpg', '病例详情'], ['/assets/aishinye/shipping.jpg', '出库发货'], ['/assets/aishinye/patient-form.jpg', '患者资料采集'], ['/assets/aishinye/plan-review.jpg', '方案审阅'],
-          ].map(([src, label], index) => <figure key={label} style={{ '--page-index': index }}><img src={src} alt={label} loading="lazy" /><figcaption>{label}</figcaption></figure>)}
+            ['/assets/aishinye/case-analysis.jpg', '病例分析'],
+            ['/assets/aishinye/key-product-selection.jpg', '资料审核'],
+            ['/assets/aishinye/key-bo-plan.jpg', '病例详情'],
+            ['/assets/aishinye/bo-front-teeth-form.jpg', 'BO 前牙塑形器'],
+            ['/assets/aishinye/patient-form.jpg', '患者资料采集', 'peek'],
+            ['/assets/aishinye/key-home-02.jpg', '方案审阅'],
+          ].map(([src, label, mode], index) => <figure className={mode === 'peek' ? 'is-peek' : undefined} key={label} style={{ '--page-index': index }}><img src={src} alt={label} loading="lazy" /><figcaption>{label}</figcaption></figure>)}
         </div>
       </section>
 
